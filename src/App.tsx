@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useLanyardWS } from "use-lanyard";
+import { Discord } from "./components/Discord"
+import { Footer } from "./components/Footer"
 import './App.css';
 
-function App() {
+const DISCORD_ID = "432958582536011777";
+
+export const App = () => {
+  const data = useLanyardWS(DISCORD_ID);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	  <div>
+		<Discord lanyard={data} />
+		<Footer spotify={data?.spotify} />
+	  </div>
+	);
 }
 
 export default App;
