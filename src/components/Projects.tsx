@@ -2,7 +2,7 @@ import { ProjectCard } from "./ProjectCard";
 
 export const Projects = () => {
   return (
-    <div className="flex flex-col items-center justify-center">
+	  <div className="flex flex-col items-center justify-center mb-5 lg:mb-0">
 	  <div className="self-start">
 		<p className="mb-[2.5rem] text-[1.1rem] font-bold self-start text-secondary">
 		  Featured Projects
