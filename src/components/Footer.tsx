@@ -7,11 +7,11 @@ export const Footer = ({
   spotify: LanyardSpotify | undefined | null;
 }) => {
   return (
-    <footer className="flex flex-wrap items-center justify-center py-4 px-10 sm:justify-between md:px-20">
+	  <div className="flex flex-wrap w-full items-center justify-center pb-5 sm:justify-between sm:pb-0">
       <Spotify spotify={spotify} />
       <p className="mt-5 text-[0.9rem] text-secondary sm:mt-0">
         Copyright &copy; Adrephos {new Date().getFullYear()}. All rights reserved
       </p>
-    </footer>
+    </div>
   );
 };
