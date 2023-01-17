@@ -1,7 +1,7 @@
 import { Spotify as lanyardSpotify } from "use-lanyard";
 
 function shortString(str: string){
-	return str.length <= 41 ? str : str.slice(0, 42)
+	return str.length <= 41 ? str : str.slice(0, 39) + "..."
 }
 
 export const Spotify = ({
