@@ -1,5 +1,9 @@
 import { Spotify as lanyardSpotify } from "use-lanyard";
 
+function shortString(str: string){
+	return str.length <= 41 ? str : str.slice(0, 42)
+}
+
 export const Spotify = ({
   spotify,
 }: {
@@ -21,9 +25,9 @@ export const Spotify = ({
         <p className="text-[0.9rem] font-bold text-[#1ed760]">
           Listening to spotify...
         </p>
-        <p className="text-[0.8rem] font-bold">{spotify.song}</p>
-        <p className="text-[0.8rem]">by {spotify.artist}</p>
-        <p className="text-[0.8rem]">on {spotify.album}</p>
+        <p className="text-[0.8rem] font-bold">{shortString(spotify.song)}</p>
+        <p className="text-[0.8rem]">by {shortString(spotify.artist)}</p>
+        <p className="text-[0.8rem]">on {shortString(spotify.album)}</p>
       </div>
     </div>
   ) : (
