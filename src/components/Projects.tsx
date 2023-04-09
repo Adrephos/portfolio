@@ -1,6 +1,6 @@
 import { ProjectCard } from "./ProjectCard";
 
-export const Projects = () => {
+export const Projects = ({statusColor} : { statusColor: string | undefined }) => {
   return (
 	  <div className="flex flex-col items-center justify-center mb-5 lg:mb-0">
 	  <div className="self-start">
@@ -15,6 +15,7 @@ export const Projects = () => {
           color="#3178C6"
           lang="TypeScript"
           url="https://github.com/Adrephos/portfolio"
+					statusColor={statusColor}
         />
         <ProjectCard
           title="shux-api"
@@ -22,6 +23,7 @@ export const Projects = () => {
           color="#00ACD7"
           lang="Go"
           url="https://github.com/shuxbot/shux-api"        
+					statusColor={statusColor}
 		/>
         <ProjectCard
           title="Distropia/Nursena"
@@ -29,6 +31,7 @@ export const Projects = () => {
           color="#00ACD7"
           lang="Go"
           url="https://github.com/phelferick/Nursena"
+					statusColor={statusColor}
         />
         <ProjectCard
           title="Advent of code 2022"
@@ -36,6 +39,7 @@ export const Projects = () => {
           color="#00ACD7"
           lang="Go"
           url="https://github.com/Adrephos/advent-of-code"
+					statusColor={statusColor}
         />
       </div>
     </div>

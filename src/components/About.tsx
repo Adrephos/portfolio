@@ -1,6 +1,6 @@
 import { TechStack } from "./TechStack";
 
-export const About = () => {
+export const About = ({statusColor} : { statusColor: string | undefined }) => {
   return (
     <div className="text-secondary items-center">
       <p>
@@ -16,7 +16,7 @@ export const About = () => {
       <br />
       <p>Technologies I commonly use:</p>
       <br />
-      <TechStack />
+      <TechStack statusColor={statusColor}/>
       <br />
     </div>
   );

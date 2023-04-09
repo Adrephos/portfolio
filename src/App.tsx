@@ -36,12 +36,12 @@ export const App = () => {
 		  </div>
 		  <div className="flex flex-wrap flex-row-reverse h-full justify-around">
 		    <div className="flex flex-col p-5 lg:border-l-2 justify-center h-full md:p-5 md:pl-10" style={style}>
-			  <About/>
-			  <Discord lanyard={data} />
+			  <About statusColor={statusColor}/>
+			  <Discord lanyard={data} statusColor={statusColor} />
 			</div>
 		    <div className="flex flex-col py-10 px-5 items-center justify-around h-full lg:p-0">
-			  <Projects/>
-			  <Playlists/>
+			  <Projects statusColor={statusColor}/>
+			  <Playlists statusColor={statusColor}/>
 			  <Footer spotify={data?.spotify} />
 			</div>
 		</div>
