@@ -11,7 +11,7 @@ export const TopBar = ({discordUser}: {discordUser: DiscordUser | undefined}) =>
 	  <div className="flex flex-wrap items-center justify-center bg-gray py-3 px-5 sm:justify-between md:px-10">
 	  <div className="flex justify-center items-center gap-5">
 		<img
-		  src={discordUser ? `https://cdn.discordapp.com/avatars/${discordUser!.id}/${discordUser!.avatar}.png?size=2048` : "https://github.com/adrephos.png"}
+		  src={discordUser ? `https://cdn.discordapp.com/avatars/${discordUser!.id}/${discordUser!.avatar}` : "https://github.com/adrephos.png"}
 		  alt="avatar"
 		  className="h-[3.5rem] w-[3.5rem] rounded-lg"
 		/>
