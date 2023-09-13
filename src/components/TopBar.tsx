@@ -45,7 +45,7 @@ export const TopBar = ({discordUser}: {discordUser: DiscordUser | undefined}) =>
           <SteamIcon />
         </a>
         <a
-          href="https://www.linkedin.com/in/juan-avenda%C3%B1o-6abb3a223/"
+          href="https://www.linkedin.com/in/adrephos/"
           target="_blank"
           rel="noopener noreferrer"
 		  className="hover:-translate-y-1 active:translate-y-1"
