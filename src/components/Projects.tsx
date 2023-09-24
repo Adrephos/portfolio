@@ -10,11 +10,11 @@ export const Projects = ({statusColor} : { statusColor: string | undefined }) =>
 	  </div>
       <div className="grid max-w-[43.75rem] grid-cols-1 gap-y-6 gap-x-8 md:grid-cols-2">
         <ProjectCard
-          title="Portfolio"
-          desc="This website"
-          color="#3178C6"
-          lang="TypeScript"
-          url="https://github.com/Adrephos/portfolio"
+          title="Optika"
+          desc="Home security system"
+          color="#ffe873"
+          lang="Python"
+          url="https://github.com/DanielPalacios05/OptikaProject"
 					statusColor={statusColor}
         />
         <ProjectCard
@@ -26,19 +26,19 @@ export const Projects = ({statusColor} : { statusColor: string | undefined }) =>
 					statusColor={statusColor}
 		/>
         <ProjectCard
-          title="Distropia/Nursena"
-          desc="Gateway for Distropia"
+          title="Syntax analysis"
+          desc="Top-down and bottom-up parsers"
           color="#00ACD7"
           lang="Go"
-          url="https://github.com/phelferick/Nursena"
+          url="https://github.com/Adrephos/syntax-analysis"
 					statusColor={statusColor}
         />
         <ProjectCard
-          title="Advent of code 2022"
-          desc="Some solutions of AOC 2022 edition"
-          color="#00ACD7"
-          lang="Go"
-          url="https://github.com/Adrephos/advent-of-code"
+          title="TelePong"
+          desc="Oline Pong game with multiplayer"
+          color="#3949a9"
+          lang="C"
+          url="https://github.com/Adrephos/TelePong"
 					statusColor={statusColor}
         />
       </div>
