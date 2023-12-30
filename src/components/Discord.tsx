@@ -3,13 +3,13 @@ import { Data } from "use-lanyard";
 
 export const Discord = ({
 	lanyard,
-	statusColor, 
+	statusColor,
 }: {
 	lanyard: Data | undefined;
-	statusColor: string | undefined; 
+	statusColor: string | undefined;
 }) => {
 	const mainActivity = lanyard?.activities.find(
-		(activity) => activity.type === 0 && activity.name != "YouTube Music"
+		(activity) => activity.type === 0 && activity.name !== "YouTube Music"
 	);
 
 	const [style, setStyle] = useState({});
@@ -24,7 +24,7 @@ export const Discord = ({
 
 	return (
 		<div className="flex flex-col items-center">
-			<div className="my-5 flex h-[9.37rem] min-w-[18.75rem] px-5 items-center justify-center rounded-lg bg-[#1F1F1F]">
+			<div className="my-5 flex h-[9.37rem] min-w-[18.75rem] px-5 items-center justify-center rounded-lg bg-opacity-0">
 				{mainActivity ? (
 					<div className="flex flex-row items-center">
 						<img

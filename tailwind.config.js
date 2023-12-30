@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         primary: "#131313",
         secondary: "#FBFFFE",
-        gray: "#1F1F1F",
+        gray: "#000000",
         green: "#31A254",
       },
       display: ["group-hover"],

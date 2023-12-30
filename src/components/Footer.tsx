@@ -1,4 +1,4 @@
-import { Data, Spotify as LanyardSpotify } from "use-lanyard";
+import { Data } from "use-lanyard";
 import { Spotify } from "./Spotify";
 import { YoutubeMusic } from "./YoutubeMusic";
 

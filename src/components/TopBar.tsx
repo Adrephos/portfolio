@@ -8,7 +8,7 @@ import {
 
 export const TopBar = ({discordUser}: {discordUser: DiscordUser | undefined}) => {
   return (
-	  <div className="flex flex-wrap items-center justify-center bg-gray py-3 px-5 sm:justify-between md:px-10">
+	  <div className="flex flex-wrap items-center justify-center py-3 px-5 sm:justify-between md:px-10">
 	  <div className="flex justify-center items-center gap-5">
 		<img
 		  src={discordUser ? `https://cdn.discordapp.com/avatars/${discordUser!.id}/${discordUser!.avatar}` : "https://github.com/adrephos.png"}

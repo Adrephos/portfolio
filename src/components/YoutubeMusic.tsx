@@ -11,7 +11,7 @@ export const YoutubeMusic = ({
 
   return ytMusic ? (
     <div
-      className="flex h-[8rem] max-w-[90%] sm:max-w-[25rem] items-center justify-center rounded-lg bg-[#1F1F1F] p-5">
+      className="flex h-[8rem] max-w-[90%] sm:max-w-[25rem] items-center justify-center rounded-lg bg-opacity-0 p-5">
       <img
         src={
           ytMusic.assets?.large_image.startsWith(
@@ -36,7 +36,7 @@ export const YoutubeMusic = ({
       </div>
     </div >
   ) : (
-    <div className="flex h-[6.25rem] w-[18.75rem] items-center rounded-lg bg-[#1F1F1F] p-2 text-center">
+    <div className="flex h-[6.25rem] w-[18.75rem] items-center rounded-lg bg-opacity-0 p-2 text-center">
       <p className="text-secondary">
         I'm not listening to anything right now
       </p>
