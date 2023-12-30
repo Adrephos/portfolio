@@ -31,7 +31,7 @@ export const App = () => {
 	}, [statusColor]);
 
 	return (
-		<div className="flex flex-col h-screen w-auto gap-5 md:gap-0 sm:flex-col">
+		<div className="flex flex-col h-full w-auto gap-5 md:gap-0 lg:h-screen sm:flex-col">
 			<div className="border-b-2" style={style}>
 				<TopBar discordUser={data?.discord_user} />
 			</div>
