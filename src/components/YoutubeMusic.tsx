@@ -1,4 +1,4 @@
-import { Data, Spotify as lanyardSpotify } from "use-lanyard";
+import { Data } from "use-lanyard";
 
 export const YoutubeMusic = ({
   lanyard,
@@ -6,7 +6,7 @@ export const YoutubeMusic = ({
   lanyard: Data | undefined;
 }) => {
   const ytMusic = lanyard?.activities.find(
-    (activity) => activity.type === 0 && activity.name == "YouTube Music"
+    (activity) => activity.type === 0 && activity.name === "YouTube Music"
   )
 
   return ytMusic ? (
