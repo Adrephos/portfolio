@@ -8,7 +8,7 @@ export const Footer = ({
 	lanyard: Data | undefined;
 }) => {
 	return (
-		<div className="flex flex-wrap w-full items-center justify-center pb-5 sm:justify-between sm:pb-0">
+		<div className="flex flex-wrap w-full items-center pb-5 justify-around sm:pb-0">
 			{lanyard?.spotify ? (
 				<Spotify spotify={lanyard?.spotify} />
 			) :

@@ -1,5 +1,9 @@
 import { Data } from "use-lanyard";
 
+function shortString(str: string) {
+	return str.length <= 41 ? str : str.slice(0, 39) + "..."
+}
+
 export const YoutubeMusic = ({
   lanyard,
 }: {
@@ -11,7 +15,7 @@ export const YoutubeMusic = ({
 
   return ytMusic ? (
     <div
-      className="flex h-[8rem] max-w-[90%] sm:max-w-[25rem] items-center justify-center rounded-lg bg-opacity-0 p-5">
+      className="flex h-[8rem] max-w-[90%] sm:max-w-[23rem] items-center justify-center rounded-lg bg-opacity-0">
       <img
         src={
           ytMusic.assets?.large_image.startsWith(
@@ -31,8 +35,8 @@ export const YoutubeMusic = ({
         <p className="text-[0.9rem] font-bold text-[#1ed760]">
           Listening to YouTube Music...
         </p>
-        <p className="text-[0.8rem] truncate font-bold">{ytMusic.details}</p>
-        <p className="text-[0.8rem] truncate">by {ytMusic.state}</p>
+        <p className="text-[0.8rem] font-bold">{shortString(ytMusic.details!)}</p>
+        <p className="text-[0.8rem]">by {shortString(ytMusic.state)}</p>
       </div>
     </div >
   ) : (

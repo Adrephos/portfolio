@@ -40,12 +40,11 @@ export const Background = () => {
           number: {
             density: {
               enable: true,
-              area: 4000,
             },
-            value: 2000,
+            value: 1000
           },
           opacity: {
-            value: 0.7,
+            value: 0.5,
           },
           shape: {
             type: "circle",

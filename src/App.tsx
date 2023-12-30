@@ -36,11 +36,11 @@ export const App = () => {
 				<TopBar discordUser={data?.discord_user} />
 			</div>
 			<div className="flex flex-wrap flex-row-reverse h-full justify-around">
-				<div className="flex flex-col p-5 lg:border-l-2 justify-center h-full md:p-5 md:pl-10" style={style}>
+				<div className="flex flex-col p-5 lg:w-2/5 lg:border-l-2 items-center justify-center h-full lg:p-0" style={style}>
 					<About statusColor={statusColor} />
 					<Discord lanyard={data} statusColor={statusColor} />
 				</div>
-				<div className="flex flex-col py-10 px-5 items-center justify-around h-full lg:p-0">
+				<div className="flex flex-col lg:w-3/5 py-0 px-5 items-center justify-around h-full lg:p-0">
 					<Projects statusColor={statusColor} />
 					<Playlists statusColor={statusColor} />
 					<Footer lanyard={data} />
