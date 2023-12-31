@@ -41,7 +41,7 @@ export const Background = () => {
             density: {
               enable: true,
             },
-            value: 1000
+            value: 500
           },
           opacity: {
             value: 0.5,
@@ -50,7 +50,7 @@ export const Background = () => {
             type: "circle",
           },
           size: {
-            value: { min: 0.1, max: 1 },
+            value: { min: 0.1, max: 1.5 },
           },
         },
         detectRetina: true,
