@@ -9,7 +9,7 @@ export const Discord = ({
 	statusColor: string | undefined;
 }) => {
 	const mainActivity = lanyard?.activities.find(
-		(activity) => activity.type === 0 && activity.name !== "YouTube Music"
+		(activity) => activity.type === 0 && !activity.name.startsWith("YouTube")
 	);
 
 	const [style, setStyle] = useState({});
@@ -36,7 +36,12 @@ export const Discord = ({
 										/mp:external\/([^]*)\/(http[s])/g,
 										"$2:/"
 									)
-									: `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
+									: mainActivity.assets?.large_image.startsWith(
+										"mp:attachments"
+									) ? mainActivity.assets.large_image.replace(
+										/mp:attachments\/([^]*)\/([^]*)/g,
+										"https://cdn.discordapp.com/attachments/$1/$2"
+									) : `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
 							}
 							alt="activity"
 							className="mr-3 h-[5rem] w-[5rem] rounded-lg"
