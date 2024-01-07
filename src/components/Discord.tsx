@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Data } from "use-lanyard";
 
+
+
+// Example usage:
+
 export const Discord = ({
 	lanyard,
 	statusColor,
@@ -13,6 +17,19 @@ export const Discord = ({
 	);
 
 	const [style, setStyle] = useState({});
+
+	function getCover(name: string): string | undefined {
+		const xhr = new XMLHttpRequest();
+		xhr.open('GET', "https://api.adrephos.com/v1/games/cover/" + name, false);
+		xhr.send(null);
+		const response = JSON.parse(xhr.responseText);
+
+		if (response.success) {
+			return response.data.url;
+		} else {
+			return undefined;
+		}
+	}
 
 	useEffect(() => {
 		setStyle({
@@ -41,7 +58,9 @@ export const Discord = ({
 									) ? mainActivity.assets.large_image.replace(
 										/mp:attachments\/([^]*)\/([^]*)/g,
 										"https://cdn.discordapp.com/attachments/$1/$2"
-									) : `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
+									) : mainActivity.assets?.large_image
+										? `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
+										: getCover(mainActivity!.name)
 							}
 							alt="activity"
 							className="mr-3 h-[5rem] w-[5rem] rounded-lg"

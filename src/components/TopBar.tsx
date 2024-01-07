@@ -1,4 +1,3 @@
-import { DiscordUser } from "use-lanyard"
 import {
   DiscordIcon,
   GitHubIcon,
@@ -6,12 +5,12 @@ import {
   LinkedInIcon,
 } from "./Icons";
 
-export const TopBar = ({discordUser}: {discordUser: DiscordUser | undefined}) => {
+export const TopBar = () => {
   return (
 	  <div className="flex flex-wrap items-center justify-center py-3 px-5 sm:justify-between md:px-10">
 	  <div className="flex justify-center items-center gap-5">
 		<img
-		  src={discordUser ? `https://cdn.discordapp.com/avatars/${discordUser!.id}/${discordUser!.avatar}` : "https://github.com/adrephos.png"}
+		  src="https://github.com/adrephos.png"
 		  alt="avatar"
 		  className="h-[3.5rem] w-[3.5rem] rounded-lg"
 		/>
