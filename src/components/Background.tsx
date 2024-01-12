@@ -25,7 +25,7 @@ export const Background = () => {
             value: "#ffffff",
           },
           collisions: {
-            enable: true,
+            enable: false,
           },
           move: {
             direction: "none",
