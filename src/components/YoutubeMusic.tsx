@@ -10,7 +10,7 @@ export const YoutubeMusic = ({
   lanyard: Data | undefined;
 }) => {
   const ytMusic = lanyard?.activities.find(
-    (activity) => activity.type === 0 && activity.name.startsWith("YouTube")
+    (activity) => activity.type === 2 && activity.name.startsWith("YouTube")
   )
 
   return ytMusic ? (
