@@ -34,11 +34,11 @@ export const Projects = ({ statusColor }: { statusColor: string | undefined }) =
           statusColor={statusColor}
         />
         <ProjectCard
-          title="TelePong"
-          desc="Oline Pong game with multiplayer"
-          color="#3949a9"
-          lang="C"
-          url="https://github.com/Adrephos/TelePong"
+          title="Spring Chat"
+          desc="Real-time chat application"
+          color="#f8991c"
+          lang="Java"
+          url="https://github.com/Adrephos/spring-websocket-chat"
           statusColor={statusColor}
         />
       </div>
