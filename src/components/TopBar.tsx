@@ -21,7 +21,7 @@ export const TopBar = () => {
           href="https://discord.com/users/432958582536011777"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-1 active:translate-y-1"
+          className="hover:-translate-y-1 active:translate-y-1 hover:scale-110 active:scale-90 transition-all"
         >
           <DiscordIcon />
         </a>
@@ -29,7 +29,7 @@ export const TopBar = () => {
           href="https://github.com/Adrephos"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-1 active:translate-y-1"
+          className="hover:-translate-y-1 active:translate-y-1 hover:scale-110 active:scale-90 transition-all"
         >
           <GitHubIcon />
         </a>
@@ -37,7 +37,7 @@ export const TopBar = () => {
           href="https://steamcommunity.com/id/adrephos"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-1 active:translate-y-1"
+          className="hover:-translate-y-1 active:translate-y-1 hover:scale-110 active:scale-90 transition-all"
         >
           <SteamIcon />
         </a>
@@ -45,7 +45,7 @@ export const TopBar = () => {
           href="https://www.linkedin.com/in/adrephos/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-1 active:translate-y-1"
+          className="hover:-translate-y-1 active:translate-y-1 hover:scale-110 active:scale-90 transition-all"
         >
           <LinkedInIcon />
         </a>
