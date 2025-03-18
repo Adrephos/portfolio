@@ -34,7 +34,7 @@ export const Discord = ({
       }
     }
     getCover()
-  }, [mainActivity?.name])
+  }, [mainActivity])
 
   useEffect(() => {
     setStyle({
