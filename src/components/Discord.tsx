@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { Data } from "use-lanyard";
 
-
-
-// Example usage:
-
 export const Discord = ({
   lanyard,
   statusColor,
@@ -17,20 +13,28 @@ export const Discord = ({
   );
 
   const [style, setStyle] = useState({});
+  const [cover, setCover] = useState(null)
 
-  function getCover(name: string): string | undefined {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://api.adrephos.com/v1/games/cover/" + name, false);
-    xhr.send(null);
-    const response = JSON.parse(xhr.responseText);
-    console.log(mainActivity?.assets?.large_image);
+  useEffect(() => {
+    const getCover = async () => {
+      if (!mainActivity) return
+      const url = "https://api.adrephos.com/v1/games/cover/" + mainActivity?.name
 
-    if (response.success) {
-      return response.data.url;
-    } else {
-      return undefined;
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          setCover(null)
+          return
+        }
+        const json = await response.json();
+        setCover(json.data.url);
+      } catch (error) {
+        console.error(error)
+        setCover(null)
+      }
     }
-  }
+    getCover()
+  }, [mainActivity?.name])
 
   useEffect(() => {
     setStyle({
@@ -61,7 +65,7 @@ export const Discord = ({
                     "https://cdn.discordapp.com/attachments/$1/$2"
                   ) : mainActivity.assets?.large_image
                     ? `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
-                    : getCover(mainActivity!.name)
+                    : cover ?? "gamepad-svgrepo-com.png"
               }
               alt="activity"
               className="mr-3 h-[5rem] w-[5rem] rounded-lg"
