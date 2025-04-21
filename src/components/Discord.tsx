@@ -44,32 +44,43 @@ export const Discord = ({
     });
   }, [statusColor]);
 
+  console.log(mainActivity)
+
   return (
     <div className="flex flex-col items-center">
       <div className="my-5 flex h-[9.37rem] min-w-[18.75rem] px-5 items-center justify-center rounded-lg bg-opacity-0">
         {mainActivity ? (
           <div className="flex flex-row items-center">
-            <img
-              src={
-                mainActivity.assets?.large_image.startsWith(
-                  "mp:external"
-                )
-                  ? mainActivity.assets.large_image.replace(
-                    /mp:external\/([^]*)\/(http[s])/g,
-                    "$2:/"
+            <div className="relative w-fit">
+              <img
+                src={
+                  mainActivity.assets?.large_image.startsWith(
+                    "mp:external"
                   )
-                  : mainActivity.assets?.large_image.startsWith(
-                    "mp:attachments"
-                  ) ? mainActivity.assets.large_image.replace(
-                    /mp:attachments\/([^]*)\/([^]*)/g,
-                    "https://cdn.discordapp.com/attachments/$1/$2"
-                  ) : mainActivity.assets?.large_image
-                    ? `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
-                    : cover ?? "gamepad-svgrepo-com.png"
-              }
-              alt="activity"
-              className="mr-3 h-[5rem] w-[5rem] rounded-lg"
-            />
+                    ? mainActivity.assets.large_image.replace(
+                      /mp:external\/([^]*)\/(http[s])/g,
+                      "$2:/"
+                    )
+                    : mainActivity.assets?.large_image.startsWith(
+                      "mp:attachments"
+                    ) ? mainActivity.assets.large_image.replace(
+                      /mp:attachments\/([^]*)\/([^]*)/g,
+                      "https://cdn.discordapp.com/attachments/$1/$2"
+                    ) : mainActivity.assets?.large_image
+                      ? `https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.large_image}.webp`
+                      : cover ?? `https://cdn.discordapp.com/app-icons/${mainActivity.application_id}/5049b9e12bad6ff0427800eaadb19bee.webp?size=240`
+                }
+                alt="activity main large icon"
+                className="mr-3 mb-3 h-[5rem] w-[5rem] rounded-lg block"
+              />
+              {mainActivity.assets?.small_image && (
+                <img
+                  className="absolute bottom-1 right-1 w-7 h-7 rounded-full bg-black z-10 border-2 border-gray-800"
+                  src={`https://cdn.discordapp.com/app-assets/${mainActivity.application_id}/${mainActivity.assets?.small_image}.webp`}
+                  alt="activity small icon"
+                />
+              )}
+            </div>
             <div className="flex flex-col truncate">
               <p className="text-[0.8rem] font-bold text-secondary">
                 {mainActivity.name}
