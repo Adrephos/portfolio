@@ -14,7 +14,14 @@ export const TopBar = () => {
           alt="avatar"
           className="h-[3.5rem] w-[3.5rem] rounded-lg"
         />
-        <p className="text-[2rem] text-secondary font-bold">Adrephos</p>
+        <a
+          className="text-[2rem] text-secondary font-bold hover:opacity-60"
+          href="https://blog.adrephos.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Blog
+        </a>
       </div>
       <div className="flex w-[12.5rem] justify-around p-2 sm:p-0">
         <a
