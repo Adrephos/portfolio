@@ -10,6 +10,14 @@ export const Projects = ({ statusColor }: { statusColor: string | undefined }) =
       </div>
       <div className="grid max-w-[43.75rem] grid-cols-1 gap-y-6 gap-x-8 md:grid-cols-2">
         <ProjectCard
+          title="Tsumu 積"
+          desc="Language immersion tracker for YouTube & Netflix"
+          color="#cb65aa"
+          lang="TypeScript"
+          url="/tsumu"
+          statusColor={statusColor}
+        />
+        <ProjectCard
           title="Optika"
           desc="Home security system"
           color="#ffe873"
