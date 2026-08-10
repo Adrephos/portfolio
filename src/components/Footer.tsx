@@ -1,11 +1,11 @@
-import { Data } from "use-lanyard";
+import { Types } from "use-lanyard";
 import { Spotify } from "./Spotify";
 import { YoutubeMusic } from "./YoutubeMusic";
 
 export const Footer = ({
   lanyard,
 }: {
-  lanyard: Data | undefined;
+  lanyard: Types.Presence | undefined;
 }) => {
   return (
     <div className="flex flex-wrap w-full items-center pb-5 justify-around sm:pb-0">

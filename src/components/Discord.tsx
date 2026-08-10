@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Data } from "use-lanyard";
+import { Types } from "use-lanyard";
 
 export const Discord = ({
   lanyard,
   statusColor,
 }: {
-  lanyard: Data | undefined;
+  lanyard: Types.Presence | undefined;
   statusColor: string | undefined;
 }) => {
   const mainActivity = lanyard?.activities.find(
@@ -52,14 +52,14 @@ export const Discord = ({
             <div className="relative w-fit">
               <img
                 src={
-                  mainActivity.assets?.large_image.startsWith(
+                  mainActivity.assets?.large_image?.startsWith(
                     "mp:external"
                   )
                     ? mainActivity.assets.large_image.replace(
                       /mp:external\/([^]*)\/(http[s])/g,
                       "$2:/"
                     )
-                    : mainActivity.assets?.large_image.startsWith(
+                    : mainActivity.assets?.large_image?.startsWith(
                       "mp:attachments"
                     ) ? mainActivity.assets.large_image.replace(
                       /mp:attachments\/([^]*)\/([^]*)/g,
