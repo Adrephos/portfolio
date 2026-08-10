@@ -34,14 +34,6 @@ export const Projects = ({ statusColor }: { statusColor: string | undefined }) =
           statusColor={statusColor}
         />
         <ProjectCard
-          title="Syntax analysis"
-          desc="Top-down and bottom-up parsers"
-          color="#00ACD7"
-          lang="Go"
-          url="https://github.com/Adrephos/syntax-analysis"
-          statusColor={statusColor}
-        />
-        <ProjectCard
           title="Spring Chat"
           desc="Real-time chat application"
           color="#f8991c"
