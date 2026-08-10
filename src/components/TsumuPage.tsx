@@ -50,15 +50,13 @@ export const TsumuPage = () => {
             <LockIcon size={18} />
             Source — private
           </div>
-          <a
-            href="https://adrephos.com/tsumu/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/tsumu/privacy"
             className="flex items-center gap-2 rounded-lg bg-primary border border-neutral-700 px-5 py-3 text-secondary font-bold transition-all hover:-translate-y-1 hover:border-green active:translate-y-1"
           >
             <ShieldIcon size={18} />
             Privacy Policy
-          </a>
+          </Link>
         </div>
 
         <p className="text-[0.85rem] text-neutral-500 mt-2">

@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import { TsumuPage } from './components/TsumuPage';
+import { PrivacyPage } from './components/PrivacyPage';
 import 'react-tooltip/dist/react-tooltip.css'
 
 const root = ReactDOM.createRoot(
@@ -15,6 +16,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/tsumu" element={<TsumuPage />} />
+        <Route path="/tsumu/privacy" element={<PrivacyPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
