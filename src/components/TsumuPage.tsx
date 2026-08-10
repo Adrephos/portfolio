@@ -5,7 +5,7 @@ import { ArrowLeftIcon, CheckIcon, LockIcon, ShieldIcon } from "./Icons";
 const FEATURES = [
   "Automatic language detection on YouTube and Netflix",
   "Daily immersion goals, tracked per language",
-  "Hide video cards guessed to be in a different language than your target",
+  "Hides videos that don't match your target language",
   "Dashboard with streaks, watch history, and language breakdowns",
   "All data stays local — export/import anytime",
 ];
