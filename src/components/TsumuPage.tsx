@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Background } from "./Background";
-import { ArrowLeftIcon, CheckIcon, LockIcon, ShieldIcon } from "./Icons";
+import { ArrowLeftIcon, CheckIcon, ShieldIcon } from "./Icons";
 
 const FEATURES = [
   "Automatic language detection on YouTube and Netflix",
@@ -46,10 +46,6 @@ export const TsumuPage = () => {
         </ul>
 
         <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
-          <div className="flex items-center gap-2 rounded-lg bg-primary border border-neutral-700 px-5 py-3 text-neutral-400 font-bold cursor-default">
-            <LockIcon size={18} />
-            Source — private
-          </div>
           <Link
             to="/tsumu/privacy"
             className="flex items-center gap-2 rounded-lg bg-primary border border-neutral-700 px-5 py-3 text-secondary font-bold transition-all hover:-translate-y-1 hover:border-green active:translate-y-1"
