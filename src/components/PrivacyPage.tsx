@@ -1,6 +1,4 @@
-import { Link } from "react-router-dom";
-import { Background } from "./Background";
-import { ArrowLeftIcon } from "./Icons";
+import { TsumuLayout, TsumuSection } from "./TsumuLayout";
 
 const SECTIONS: { heading: string; body: React.ReactNode }[] = [
   {
@@ -10,16 +8,24 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
         <p>
           All data Tsumu collects is stored <strong className="text-secondary">locally in your
           browser</strong> (via IndexedDB and <code className="text-green">chrome.storage.local</code>)
-          and is never sent to Tsumu's developer or any third party. There is no account,
-          sign-in, or remote server involved.
+          and is never sent to Tsumu's developer. There is no Tsumu account or remote server. Two
+          optional connections talk to other services, never to Tsumu: the Steam connection, and
+          Sync, which copies your data to a private folder in your own Google Drive. Neither is on
+          until you turn it on.
         </p>
         <p className="mt-3">Data stored locally includes:</p>
         <ul className="mt-2 flex flex-col gap-2 list-disc list-inside">
-          <li><strong className="text-secondary">Watch sessions</strong> — site (YouTube/Netflix), video ID, title, channel name, channel avatar URL, detected or manually-selected language, start/end times, and duration.</li>
-          <li><strong className="text-secondary">Settings</strong> — target language, app language, daily goals per language, custom categories, a timestamp-saving keybind, day-reset hour, and the "hide non-target videos" preferences.</li>
+          <li><strong className="text-secondary">Watch sessions</strong> — site, video ID, title, channel name, channel avatar URL, thumbnail, detected or manually-selected language, start/end times, and duration. On Jellyfin and on other sites, a session also keeps the address of the page, so the video can be reopened from your history.</li>
+          <li><strong className="text-secondary">Manual timers and entries</strong> — the language, category, title and times of activity you log yourself.</li>
+          <li><strong className="text-secondary">Settings</strong> — target language, app language, daily goals per language, custom categories, a timestamp-saving keybind, day-reset hour, the minimum length of a manual timer, the "hide non-target videos" preferences, per-channel language overrides, and the timers you pinned.</li>
           <li><strong className="text-secondary">Saved timestamps</strong> you bookmark while watching.</li>
           <li><strong className="text-secondary">Mining list</strong> — videos you mark for later review.</li>
-          <li><strong className="text-secondary">Manual language overrides</strong> you set for individual videos.</li>
+          <li><strong className="text-secondary">Videos you switched tracking off for</strong>, and <strong className="text-secondary">manual language overrides</strong> you set for individual videos.</li>
+          <li><strong className="text-secondary">Channel avatars</strong>, kept so your history can show them without asking again.</li>
+          <li><strong className="text-secondary">Steam connection (only if you set it up)</strong> — your Steam Web API key and SteamID64, the games you chose to count (with the language of each), the games you said never to count, and a game that is running and waiting for your decision. The key is stored unencrypted in this browser, like your settings, and is not part of Export. Game time is kept as watch sessions with the game's name and its store picture address.</li>
+          <li><strong className="text-secondary">Anki counting (only if you turn it on)</strong> — the address of AnkiConnect, the minutes of pause that end a sitting, the decks you chose to count (with the language of each) and, per deck, the time of the last review read. Reviews are kept as watch sessions with the deck's name.</li>
+          <li><strong className="text-secondary">Migaku counting (only if you turn it on)</strong> — the minutes of pause that end a sitting, and, per deck, the time of the last review read. Reviews are kept as watch sessions with the deck's name.</li>
+          <li><strong className="text-secondary">Sync (only if you connect it)</strong> — the sign-in token Google gave Tsumu for your Drive, and a record of the files last seen in your Drive (their names, modified times and a fingerprint of each file's text). The token and this record stay in this browser and are never part of Export or of what is synced.</li>
         </ul>
       </>
     ),
@@ -27,15 +33,36 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
   {
     heading: "Network requests",
     body: (
-      <p>
-        Tsumu makes exactly one kind of outbound request: when a video's title/channel name
-        isn't otherwise available, it queries <strong className="text-secondary">YouTube's own
-        public oEmbed endpoint</strong> (<code className="text-green">youtube.com/oembed</code>)
-        with the video ID, to display that metadata in your history. This is an unauthenticated,
-        public request — no personal data, browsing history, or account information is sent. No
-        other network requests are made; there is no analytics, tracking, or third-party SDK of
-        any kind.
-      </p>
+      <>
+        <p>
+          Tsumu does not send your watch history, settings or any other stored data anywhere,
+          except to your own Google Drive once you turn Sync on. It makes these requests:
+        </p>
+        <ul className="mt-2 flex flex-col gap-2 list-disc list-inside">
+          <li><strong className="text-secondary">YouTube's public pages and oEmbed endpoint</strong> (<code className="text-green">youtube.com/oembed</code>, a video's public watch page, a channel's public page). Tsumu puts only the video ID or channel handle in the address. They fill in a title, channel name, channel handle or avatar that the page itself did not provide, and read a video's caption-track language when the "hide non-target videos" filter or language detection needs it. They are sent without cookies, so YouTube does not see which account you are signed in to.</li>
+          <li><strong className="text-secondary">A check for Jellyfin on the page you are visiting.</strong> Jellyfin is self-hosted, so no address identifies it. On web pages other than YouTube, Netflix and Twitch, Tsumu asks the page's own server for its public <code className="text-green">/System/Info/Public</code> endpoint (without cookies) and checks whether it answers as a Jellyfin server. The request goes only to the site you are already on, and the answer is remembered for that tab session. It is not recorded.</li>
+          <li><strong className="text-secondary">Your own Jellyfin server.</strong> On a Jellyfin server, Tsumu uses the page's own client to read the playing item's audio language, title and series poster from that same server.</li>
+          <li><strong className="text-secondary">Steam, only after you connect it.</strong> Tsumu asks Steam's Web API (<code className="text-green">api.steampowered.com</code>) about your profile: which game it is running now (about every 24 seconds while the browser is open), your name and picture, and your list of owned games. These requests carry your API key and SteamID64, which is how Steam identifies you; they go to Steam and nowhere else. When you add a game by app ID, or a game's picture does not load from its guessed address, Tsumu asks Steam's public store item service for the game's name and picture addresses, sending only the app ID and no key. The pictures load from Steam's image servers (<code className="text-green">steamstatic.com</code>) when the dashboard or popup shows them. "Sign in with Steam" opens Steam's own login page in a tab; Steam sends your SteamID64 back to an address that does not exist (<code className="text-green">tsumu.invalid</code>), and Tsumu reads it from the tab's address and closes the tab. Tsumu never sees your Steam password.</li>
+          <li><strong className="text-secondary">Anki, only after you turn it on.</strong> Tsumu asks AnkiConnect, the Anki add-on running on your own computer (by default <code className="text-green">127.0.0.1:8765</code>), for the deck names and for when each card of the decks you chose was answered and how long it took. The requests never leave your machine, and what Anki holds, such as the cards' contents, is not read.</li>
+          <li><strong className="text-secondary">Migaku, only after you turn it on.</strong> On <code className="text-green">study.migaku.com</code>, Tsumu reads the review database Migaku keeps in that page's own browser storage: deck names and when each card was answered and how long it took. It makes no request of its own, and the cards' contents are not read.</li>
+          <li><strong className="text-secondary">Google Drive, only after you turn on Sync.</strong> You sign in with Google in a window Google serves (Tsumu never sees your Google password) and allow one thing: access to the private application-data folder of your Drive (the scope <code className="text-green">drive.appdata</code>). Tsumu can read and write only that folder, which holds files it created; it cannot see anything else in your Drive. The requests go to Google (<code className="text-green">googleapis.com</code> and <code className="text-green">accounts.google.com</code>) and nowhere else. They list the files in that folder, download those that changed, and upload the ones your changes affect: one file per month of watch sessions and one file for the rest. Sync runs about once every 15 minutes, a minute after a session ends, and when you press Sync now.</li>
+        </ul>
+        <p className="mt-3">
+          What goes into the Drive files: your closed watch sessions, saved timestamps, mined
+          videos, channel names and avatar addresses, per-video and per-channel language choices,
+          the videos you switched tracking off for, your settings, a list of what you deleted (so
+          a deletion reaches your other devices, kept for about 90 days), and the portable part of
+          the Steam, Anki and Migaku settings (the games, decks and gaps you chose, and the Migaku
+          switch). What never goes in them: a session still running, your Steam API key and
+          SteamID64, the AnkiConnect address, the points Anki and Migaku were read up to, and the
+          Google sign-in token. The files are plain JSON, not encrypted by Tsumu, and are
+          protected by your Google account. Tsumu's developer has no access to them.
+        </p>
+        <p className="mt-3">
+          On Twitch and Netflix, Tsumu reads what the page has already loaded and makes no
+          requests of its own. There is no analytics, tracking, or third-party SDK of any kind.
+        </p>
+      </>
     ),
   },
   {
@@ -44,9 +71,14 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
       <ul className="flex flex-col gap-2 list-disc list-inside">
         <li><strong className="text-secondary">storage</strong> — save your settings and local tracking data.</li>
         <li><strong className="text-secondary">alarms</strong> — keep the background service worker alive so an in-progress session isn't lost.</li>
-        <li><strong className="text-secondary">tabs</strong> — detect which YouTube/Netflix tab is currently active so tracking follows the right video, and to jump back to a tab when opening a saved timestamp.</li>
-        <li><strong className="text-secondary">windows</strong> (Chrome only) — focus the correct window when opening a saved timestamp, and clean up tracking state when a window closes.</li>
-        <li><strong className="text-secondary">Host access to youtube.com and netflix.com</strong> — read video/channel info and show the in-page language badge on those two sites only. Tsumu does not run on, or request access to, any other site.</li>
+        <li><strong className="text-secondary">tabs</strong> — detect which tab is currently active so tracking follows the right video, jump back to a tab when opening a saved timestamp, and open or focus the dashboard from its keyboard shortcut.</li>
+        <li><strong className="text-secondary">windows</strong> (Chrome only) — focus the correct window when opening a saved timestamp or the dashboard, and clean up tracking state when a window closes.</li>
+        <li><strong className="text-secondary">Host access to youtube.com and netflix.com</strong> — read video/channel info, show the in-page language badge, and make the YouTube requests described above.</li>
+        <li><strong className="text-secondary">Host access to api.steampowered.com</strong> — make the Steam requests described above. Nothing is requested from it until you connect Steam.</li>
+        <li><strong className="text-secondary">Host access to localhost (127.0.0.1)</strong> — reach AnkiConnect on your own computer, as described above. Nothing is requested from it until you turn Anki on.</li>
+        <li><strong className="text-secondary">identity and host access to googleapis.com</strong> (both optional, asked for only when you press Connect) — sign in to Google and make the Google Drive requests described above. Nothing is requested until you turn Sync on, and if you decline the permission, Sync stays off.</li>
+        <li><strong className="text-secondary">Content scripts on twitch.tv and study.migaku.com</strong> — read the stream's language and show the badge on Twitch, and read your Migaku review database as described above.</li>
+        <li><strong className="text-secondary">Content scripts on every web page.</strong> Two of them run everywhere: one makes the Jellyfin check described above, and one looks for a <code className="text-green">&lt;video&gt;</code>. On a page that is not Jellyfin, it reads the video's title, duration and a frame sample to recognise it, asks Tsumu's own storage whether you already tracked it, and otherwise shows a small button that asks whether to track it. Nothing is recorded until you press it. Tsumu reads nothing else from the page.</li>
       </ul>
     ),
   },
@@ -54,11 +86,20 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
     heading: "Your control over your data",
     body: (
       <p>
-        The extension's Settings page has <strong className="text-secondary">Export Data</strong>,
-        {" "}<strong className="text-secondary">Import Data</strong>, and{" "}
-        <strong className="text-secondary">Clear All Data</strong> controls that give you full
-        access to and control over everything stored locally. Uninstalling the extension removes
-        all of its local data.
+        The extension's Settings page has <strong className="text-secondary">Export Data</strong>
+        {" "}and <strong className="text-secondary">Import Data</strong> controls, and a{" "}
+        <strong className="text-secondary">Delete All Data</strong> control in its last section,
+        that give you full access to and control over everything stored locally. Deleting removes
+        your history, saved timestamps, mined videos, settings and Steam connection (including
+        the API key). With Sync on, Delete All Data first turns Sync off and does not touch your
+        Drive, because deleting here while connected would bring everything back from it; remove
+        the Drive copy with <strong className="text-secondary">Delete cloud copy</strong> in
+        Sync's settings, or from Google Drive's Manage apps.{" "}
+        <strong className="text-secondary">Disconnect</strong> in Sync's settings stops syncing,
+        removes the sign-in token from this browser and leaves both copies as they are. A single
+        video can be switched off from its badge, and per-video language choices can be cleared.
+        Uninstalling the extension removes all of its local data. An exported file holds your
+        titles, channels, page addresses and timestamps as plain JSON.
       </p>
     ),
   },
@@ -75,42 +116,17 @@ const SECTIONS: { heading: string; body: React.ReactNode }[] = [
   },
 ];
 
-export const PrivacyPage = () => {
-  return (
-    <div className="flex flex-col min-h-dvh w-auto items-center">
-      <div className="flex flex-col max-w-[40rem] px-5 py-10 gap-6">
-        <Link
-          to="/tsumu"
-          className="group self-start flex items-center gap-2 text-secondary text-[0.9rem] opacity-70 hover:opacity-100 transition-opacity"
-        >
-          <span className="transition-transform group-hover:-translate-x-1">
-            <ArrowLeftIcon size={16} />
-          </span>
-          Back to Tsumu
-        </Link>
-
-        <div>
-          <h1 className="text-[2rem] font-bold text-secondary">Privacy Policy — Tsumu 積</h1>
-          <p className="text-[0.85rem] text-neutral-500 mt-1">Last updated: 2026-08-10</p>
-        </div>
-
-        <p className="text-neutral-400">
-          Tsumu is a browser extension that tracks how much time you spend watching content in
-          your target language on YouTube and Netflix. This page explains what data it handles
-          and why.
-        </p>
-
-        {SECTIONS.map(({ heading, body }) => (
-          <div
-            key={heading}
-            className="rounded-lg bg-primary border border-neutral-700 p-5 transition-colors hover:border-green"
-          >
-            <h2 className="text-[1.1rem] font-bold text-secondary mb-3">{heading}</h2>
-            <div className="text-neutral-400 text-[0.95rem] leading-relaxed">{body}</div>
-          </div>
-        ))}
-      </div>
-      <Background />
-    </div>
-  );
-};
+export const PrivacyPage = () => (
+  <TsumuLayout
+    page="privacy"
+    title="Privacy Policy"
+    meta="Last updated: 2026-11-19"
+    lead="Tsumu is a browser extension that tracks how much time you spend watching content in your target language on YouTube, Netflix, Twitch and Jellyfin, and on any other site where you choose to turn it on, lets you log other activity by hand, and, if you connect your Steam profile, counts the time you play the games you choose. This page explains what data it handles and why."
+  >
+    {SECTIONS.map(({ heading, body }) => (
+      <TsumuSection key={heading} heading={heading}>
+        {body}
+      </TsumuSection>
+    ))}
+  </TsumuLayout>
+);
