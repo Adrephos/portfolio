@@ -17,6 +17,12 @@ export const TsumuPage = () => (
     {FEATURES.map((f) => (
       <TsumuFeature key={f}>{f}</TsumuFeature>
     ))}
+    <p className="text-sm text-br-subtext0 py-3 border-t border-br-surface1">
+      Questions or bugs:{" "}
+      <a href="mailto:adrephos@gmail.com" className="text-br-text underline underline-offset-4">
+        adrephos@gmail.com
+      </a>
+    </p>
     <p className="text-xs text-br-overlay1 pt-4 border-t border-br-surface1">
       Not yet published to the Chrome Web Store — check back soon.
     </p>
